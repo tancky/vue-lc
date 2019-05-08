@@ -1,11 +1,14 @@
-import { get, post } from '@/axios/http.js'
-function getIndex (params) {
-    return get('/mock/5cb48c7ed491cd741c54456f/base/index', params)
+import { fetchG, fetchP } from '@/axios/http.js'
+
+// 首页
+function home(params) {
+    return fetchG('home/home', params).then(res => res.data)
 }
-function login(params) {
-    return post('/mock/5cb48c7ed491cd741c54456f/base/login', params)
+// 品牌列表
+function brandList(params) {
+    return fetchG('brand/brandList', params).then(res => res.data)
 }
 export {
-    getIndex,
-    login
+    home,
+    brandList
 }

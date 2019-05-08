@@ -1,7 +1,8 @@
 <template>
     <div class="home">
         <div id="nav">
-            <router-link to="/">Home</router-link>|
+            <router-link to="/">Home</router-link>
+            |
             <router-link to="/about">About</router-link>
         </div>
 
@@ -11,22 +12,29 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-import { getIndex } from 'api/index';
-export default {
-    name: 'home',
-    components: {
-        HelloWorld
-    },
-    async created() {
-        try {
-            await getIndex({ pageSiza: 100, num: 10 });
-        } catch (err) {
-        }
-    },
-    mounted() {},
+    // @ is an alias to /src
+    import HelloWorld from '@/components/HelloWorld.vue';
+    import { home, brandList } from 'api/index';
+    export default {
+        name: 'home',
+        components: {
+            HelloWorld
+        },
+        created() {
 
-    methods: {}
-};
+        },
+        mounted() {
+            this.getHomeInfo()
+        },
+        methods: {
+            // 获取首页接口信息
+            getHomeInfo() {
+                var that = this;
+                // 调用封装好的接口请求函数并传参
+                home().then(res => {
+                    console.log(res)
+                })
+            },
+        }
+    }
 </script>

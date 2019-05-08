@@ -1,6 +1,5 @@
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-    .BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 // cdn预加载使用
@@ -104,7 +103,7 @@ module.exports = {
     },
     css: {
         // 是否使用css分离插件 ExtractTextPlugin
-        extract:isProduction? true:false,
+        extract: isProduction ? true : false,
         // 开启 CSS source maps?
         sourceMap: false,
         // css预设器配置项
@@ -134,6 +133,6 @@ module.exports = {
         https: false,
         hotOnly: false,
         // 设置代理，用来解决本地开发跨域问题，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
-        proxy: 'https://easy-mock.com/' // 设置代理
+        proxy: 'https://mobiledev.iliangcang.com' // 设置代理
     }
 }
