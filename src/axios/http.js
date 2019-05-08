@@ -41,7 +41,7 @@ axios.interceptors.response.use(
                 position: 'middle',
                 duration: 2000
             })
-            return Promise.reject(res)
+            return Promise.reject(res.data.data.alert_msg)
         }
     }, error => {
         Indicator.close()
@@ -50,7 +50,7 @@ axios.interceptors.response.use(
             // 401：未登录
             case 401:
                 Toast({
-                    message: '未知错误!',
+                    message: '未授权，请重新登录!',
                     position: 'middle',
                     duration: 2000
                 })
@@ -63,10 +63,26 @@ axios.interceptors.response.use(
                     duration: 2000
                 })
                 break
-            // 404
+            // 404 未找到资源
             case 404:
                 Toast({
-                    message: '服务器被吃了⊙﹏⊙∥!',
+                    message: '请求错误,未找到该资源!',
+                    position: 'middle',
+                    duration: 2000
+                })
+                break
+            // 408 请求超时
+            case 408:
+                Toast({
+                    message: '请求超时!',
+                    position: 'middle',
+                    duration: 2000
+                })
+                break
+            // 500 服务器出错
+            case 500:
+                Toast({
+                    message: '服务器出错!',
                     position: 'middle',
                     duration: 2000
                 })
@@ -99,9 +115,8 @@ function fetchG(url, params) {
  * @param {Object} params [请求时携带的参数]
  */
 function fetchP(url, params) {
-    return axios.post(url, qs.stringify({
-        params: Object.assign({}, conf, params)
-    }))
+    let param = Object.assign({}, conf, params)
+    return axios.post(url, qs.stringify(param))
 }
 
 export {

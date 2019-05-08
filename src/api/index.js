@@ -8,7 +8,18 @@ function home(params) {
 function brandList(params) {
     return fetchG('brand/brandList', params).then(res => res.data)
 }
+// 文章评论提交接口
+function postArticleComment(params) {
+    return fetchP('comments/addchaptcomment', params).then(res => res.data)
+}
+// 增加喜欢接口
+function collect(params) {
+    return fetchP('user/collectionGoods', params).then(res => res.data)
+}
+
 export {
     home,
-    brandList
+    brandList,
+    postArticleComment,
+    collect
 }

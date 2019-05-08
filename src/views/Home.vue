@@ -13,8 +13,9 @@
 
 <script>
     // @ is an alias to /src
-    import HelloWorld from '@/components/HelloWorld.vue';
-    import { home, brandList } from 'api/index';
+    import HelloWorld from '@/components/HelloWorld.vue'
+    import {home, brandList, collect} from 'api/index'
+
     export default {
         name: 'home',
         components: {
@@ -31,6 +32,7 @@
             getHomeInfo() {
                 var that = this;
                 // 调用封装好的接口请求函数并传参
+                // 添加收藏
                 home().then(res => {
                     console.log(res)
                 })
