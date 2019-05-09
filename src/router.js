@@ -1,29 +1,66 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 import store from 'store/index'
+const Tabbar = () => import('./components/Tabbar/')
 Vue.use(Router)
+
 const router = new Router({
+    mode: 'history',
     routes: [
         {
             path: '/',
             name: 'home',
-            component: Home,
+            components: {
+                default: () => import('./views/Home/Home.vue'),
+                tabbar: Tabbar
+            },
             meta: {
                 auth: false, // 是否需要登录
                 keepAlive: true // 是否缓存组件
             }
         },
         {
-            path: '/about',
-            name: 'about',
+            path: '/category',
+            name: 'category',
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
-            component: () =>
-                import(/* webpackChunkName: "about" */ './views/About.vue'),
+            components: {
+                default: () =>import(/* webpackChunkName: "category" */ './views/Category/Category.vue'),
+                tabbar: Tabbar
+            },
             meta: {
-                auth: true,
+                auth: false,
+                keepAlive: true
+            }
+        },
+        {
+            path: '/cart',
+            name: 'cart',
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            components: {
+                default: () =>import(/* webpackChunkName: "cart" */ './views/Cart/Cart.vue'),
+                tabbar: Tabbar
+            },
+            meta: {
+                auth: false,
+                keepAlive: true
+            }
+        },
+        {
+            path: '/mine',
+            name: 'mine',
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            components: {
+                default: () =>import(/* webpackChunkName: "mine" */ './views/Mine/Mine.vue'),
+                tabbar: Tabbar
+            },
+            meta: {
+                auth: false,
                 keepAlive: true
             }
         },
@@ -31,7 +68,7 @@ const router = new Router({
             path: '/login',
             name: 'login',
             component: () =>
-                import(/* webpackChunkName: "login" */ './views/login.vue'),
+                import(/* webpackChunkName: "login" */ './views/Login/Login.vue'),
             meta: {
                 auth: false,
                 keepAlive: true
@@ -50,7 +87,6 @@ const router = new Router({
 
 // 全局路由钩子函数 对全局有效
 router.beforeEach((to, from, next) => {
-    console.log(to)
     let auth = to.meta.auth
     let token = store.getters['login/token'];
 

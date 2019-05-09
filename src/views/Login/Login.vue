@@ -12,51 +12,54 @@
             <input type="password" placeholder="密码" v-model="password" autocomplete='off'>
         </div>
         <div class="btnBox">
-        <button @click="loginBtn" class="loginBtn">登录</button>
+            <button @click="loginBtn" class="loginBtn">登录</button>
 
         </div>
     </section>
 </template>
 
 <script>
-// @ is an alias to /src
-import {
-    mapActions
-} from 'vuex';
-import {
-    Toast
-} from 'mint-ui';
-export default {
-    name: 'login',
-    data() {
-        return {
-            username: '',
-            password: ''
-        };
-    },
-    components: {},
-    created() {},
-    mounted() {},
-    methods: {
-        ...mapActions('login', ['login']),
-        loginBtn() {
-            if (this.username === '' || this.password === '') {
-                Toast({
-                    message: '请输入账号或密码',
-                    position: 'middle',
-                    duration: 2000
-                });
-            } else {
-                this.login({
-                    username: this.username,
-                    password: this.password,
-                    $router: this.$router,
-                    $route: this.$route
-                });
+    // @ is an alias to /src
+    import {
+        mapActions
+    } from 'vuex';
+    import {
+        Toast
+    } from 'mint-ui';
+
+    export default {
+        name: 'login',
+        data() {
+            return {
+                username: '',
+                password: ''
+            };
+        },
+        components: {},
+        created() {
+        },
+        mounted() {
+        },
+        methods: {
+            ...mapActions('login', ['login']),
+            loginBtn() {
+                if (this.username === '' || this.password === '') {
+                    Toast({
+                        message: '请输入账号或密码',
+                        position: 'middle',
+                        duration: 2000
+                    });
+                } else {
+                    this.login({
+                        username: this.username,
+                        password: this.password,
+                        $router: this.$router,
+                        $route: this.$route
+                    });
+                }
             }
         }
-    }
-};
+    };
 </script>
 <style scoped lang="scss">
     .login {
@@ -103,18 +106,19 @@ export default {
                 background-size: contain;
             }
         }
-        .btnBox{
-         margin: 68px 45px 0 45px;
-        .loginBtn {
-            @include line-height(90px,
-            90px);
-            font-size:32px;
-            border-radius: 90px;
-            background: linear-gradient(to right,#f9d191,#f9b490);
-            border:none;
-            display:block;
-            width:100%;
-            color:#fff;
-        } }
+        .btnBox {
+            margin: 68px 45px 0 45px;
+            .loginBtn {
+                @include line-height(90px,
+                    90px);
+                font-size: 32px;
+                border-radius: 90px;
+                background: linear-gradient(to right, #f9d191, #f9b490);
+                border: none;
+                display: block;
+                width: 100%;
+                color: #fff;
+            }
+        }
     }
 </style>

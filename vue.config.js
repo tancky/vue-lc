@@ -7,7 +7,7 @@ const externals = {
     vue: 'Vue',
     'vue-router': 'VueRouter',
     vuex: 'Vuex',
-    'mint-ui': 'MINT',
+    'vant-ui': 'VANT',
     axios: 'axios'
 
 }
@@ -16,21 +16,21 @@ const cdn = {
     // 开发环境
     dev: {
         css: [
-            'https://lib.baomitu.com/mint-ui/2.2.13/style.min.css'
+            'https://cdn.jsdelivr.net/npm/vant@1.6/lib/index.css'
         ],
         js: []
     },
     // 生产环境
     build: {
         css: [
-            'https://lib.baomitu.com/mint-ui/2.2.13/style.min.css'
+            'https://cdn.jsdelivr.net/npm/vant@1.6/lib/index.css'
         ],
         js: [
             'https://lib.baomitu.com/vue/2.6.6/vue.min.js',
             'https://lib.baomitu.com/vue-router/3.0.1/vue-router.min.js',
             'https://lib.baomitu.com/vuex/3.0.1/vuex.min.js',
             'https://lib.baomitu.com/axios/0.18.0/axios.min.js',
-            'https://lib.baomitu.com/mint-ui/2.2.13/index.js'
+            'https://cdn.jsdelivr.net/npm/vant@1.6/lib/vant.min.js'
         ]
     }
 }
@@ -103,7 +103,7 @@ module.exports = {
     },
     css: {
         // 是否使用css分离插件 ExtractTextPlugin
-        extract: isProduction ? true : false,
+        extract: !!isProduction,
         // 开启 CSS source maps?
         sourceMap: false,
         // css预设器配置项

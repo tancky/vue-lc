@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from 'store/index'
-import {Indicator, Toast} from 'mint-ui'
+import {Toast} from 'vant'
 
 axios.defaults.timeout = 12000 // 请求超时时间
 axios.defaults.baseURL = ''
@@ -20,7 +20,11 @@ axios.interceptors.request.use(
         // 可在此设置要发送的token
         // let token = store.getters['login/token'];
         // token && (config.headers.token = token)
-        Indicator.open('正在加载...')
+        Toast.loading({
+            mask: false,
+            duration: 0,
+            message: '加载中...'
+        })
         return config
     },
     error => {
@@ -32,7 +36,7 @@ axios.interceptors.response.use(
     res => {
         // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
         // 否则的话抛出错误 结合自身业务和后台返回的接口状态约定写respone拦截器
-        Indicator.close()
+        Toast.clear()
         if (res.status === 200 && res.data.meta.status === 0) {
             return Promise.resolve(res)
         } else {
@@ -44,7 +48,7 @@ axios.interceptors.response.use(
             return Promise.reject(res.data.data.alert_msg)
         }
     }, error => {
-        Indicator.close()
+        Toast.clear()
         const responseCode = error.response.status
         switch (responseCode) {
             // 401：未登录
